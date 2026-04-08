@@ -63,7 +63,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"file_name": {
-											"value": "@item().value",
+											"value": "@item().filename",
 											"type": "Expression"
 										}
 									}
@@ -72,7 +72,13 @@
 							"outputs": [
 								{
 									"referenceName": "ds_adls_net",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"file_name": {
+											"value": "@item().filename",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
@@ -83,15 +89,7 @@
 		"parameters": {
 			"file_list": {
 				"type": "array",
-				"defaultValue": {
-					"file_list": [
-						"netflix_cast.csv",
-						"netflix_category.csv",
-						"netflix_countries.csv",
-						"netflix_directors.csv",
-						"netflix_titles.csv"
-					]
-				}
+				"defaultValue": "[   { \"filename\": \"netflix_cast.csv\" },   { \"filename\": \"netflix_category.csv\" },   { \"filename\": \"netflix_countries.csv\" },   { \"filename\": \"netflix_directors.csv\" },   ]"
 			}
 		},
 		"annotations": []
