@@ -3,38 +3,62 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "CopyGitHubData",
-				"type": "Copy",
+				"name": "ForEachFile",
+				"type": "ForEach",
 				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+					"activities": [
+						{
+							"name": "CopyGitHubData",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_git_csv",
+									"type": "DatasetReference"
+								}
+							]
 						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "DelimitedText1",
-						"type": "DatasetReference"
-					}
-				]
+					]
+				}
 			}
 		],
+		"parameters": {
+			"file_list": {
+				"type": "array",
+				"defaultValue": {
+					"file_list": [
+						"netflix_cast.csv",
+						"netflix_category.csv",
+						"netflix_countries.csv",
+						"netflix_directors.csv",
+						"netflix_titles.csv"
+					]
+				}
+			}
+		},
 		"annotations": []
 	}
 }
