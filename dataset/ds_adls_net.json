@@ -19,7 +19,7 @@
 					"value": "@dataset().file_name",
 					"type": "Expression"
 				},
-				"fileSystem": "netflix-raw"
+				"fileSystem": "netflix-bronze"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
