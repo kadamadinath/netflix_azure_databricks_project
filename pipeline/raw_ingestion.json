@@ -5,7 +5,16 @@
 			{
 				"name": "ForEachFile",
 				"type": "ForEach",
-				"dependsOn": [],
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "ValidationGitHub",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
@@ -109,6 +118,8 @@
 			{
 				"name": "WebGithub",
 				"type": "WebActivity",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -126,6 +137,8 @@
 			{
 				"name": "Set variable1",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "WebGithub",
@@ -142,7 +155,7 @@
 				"typeProperties": {
 					"variableName": "gitMetadata",
 					"value": {
-						"value": "@activity('WebGithub').output",
+						"value": "@activity('WebGithub').output.Response",
 						"type": "Expression"
 					}
 				}
